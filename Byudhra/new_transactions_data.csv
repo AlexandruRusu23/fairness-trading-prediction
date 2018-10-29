@@ -1,0 +1,12 @@
+TransactionID,SellerID,SellerAsset,SellerAmount,BuyerID,BuyerAsset,BuyerAmount,TransactionStatus,OrderStartDate,OrderEndDate,Output
+1,9,crc_EUR,2.0,6,asst_department,4.0,rejected_by_buyer,2011-02-26,2011-03-11,False
+2,4,crc_RON,100000.0,9,asst_products,4.0,accepted,2015-02-02,2015-02-04,True
+3,6,crc_EUR,100000.0,14,asst_machines,3.0,accepted,2016-05-02,2016-05-09,True
+4,6,asst_stock,5.0,20,crc_EUR,300000.0,rejected_by_buyer,2016-05-02,2016-05-06,False
+5,1,asst_department,5.0,2,asst_products,4.0,rejected_by_seller,2011-11-02,2011-11-22,False
+6,1,crc_EUR,123.0,2,crc_EUR,32.0,accepted,2018-10-25,2018-10-20,True
+7,1,crc_USD,12.0,5,crc_RON,23.0,rejected_by_buyer,2018-10-19,2018-10-16,False
+8,2,crc_EUR,12.0,2,crc_USD,43.0,rejected_by_buyer,2018-10-15,2018-10-26,False
+9,2,crc_EUR,12.0,2,crc_USD,43.0,rejected_by_buyer,2018-10-15,2018-10-26,False
+10,2,crc_EUR,12.0,2,crc_USD,43.0,rejected_by_buyer,2018-10-15,2018-10-26,False
+11,8,crc_EUR,1.0,6,crc_EUR,2.0,accepted,2018-10-26,2018-10-02,True
