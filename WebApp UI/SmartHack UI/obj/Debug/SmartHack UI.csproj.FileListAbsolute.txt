@@ -1,0 +1,33 @@
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\SmartHack UI.dll.config
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\SmartHack UI.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\SmartHack UI.pdb
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\Antlr3.Runtime.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\Newtonsoft.Json.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.Helpers.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.Mvc.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.Optimization.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.Razor.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.WebPages.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.WebPages.Razor.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\WebGrease.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\Antlr3.Runtime.pdb
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\Newtonsoft.Json.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.Helpers.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.Mvc.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.Optimization.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.Razor.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.WebPages.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\System.Web.WebPages.Razor.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\obj\Debug\SmartHack UI.csprojResolveAssemblyReference.cache
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\obj\Debug\SmartHack UI.csproj.CoreCompileInputs.cache
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\obj\Debug\SmartHack UI.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\obj\Debug\SmartHack UI.pdb
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\EntityFramework.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\EntityFramework.SqlServer.dll
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\EntityFramework.xml
+C:\Users\stahi\Desktop\SmartHack UI\SmartHack UI\bin\EntityFramework.SqlServer.xml

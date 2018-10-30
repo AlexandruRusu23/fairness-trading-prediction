@@ -1,0 +1,313 @@
+﻿@model SmartHack_UI.Models.Company
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .legend {
+        background-color: ,
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+<div class="content-wrapper" style="overflow: scroll; background-color: white">
+    <section class="content-header" style="background-color: white"></section>
+
+    <a class="popup btn btn-primary" style="color: white; margin-left: 6%" href="/Company/Index">Back</a>
+
+    <section class="content" style="background-color: white">
+        <h1 style="margin-bottom: 40px">Transactions where @Model.Name is a seller</h1>
+
+        <div style="width:90%; margin:0 auto" class="tablecontainer">
+            <table id="myDatatableSellerTransactions" class="table table-responsive table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Seller</th>
+                        <th scope="col">Seller Asset</th>
+                        <th scope="col">Seller Amount</th>
+                        <th scope="col">Buyer</th>
+                        <th scope="col">Buyer Asset</th>
+                        <th scope="col">Buyer Amount</th>
+                        <th scope="col">Transaction Status</th>
+                        <th scope="col">Order Start Date</th>
+                        <th scope="col">Order End Date</th>
+                        <th scope="col">Output</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6" style="width: 80%; margin-left: 10%">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Transactions Chart where @Model.Name is a seller</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="areaChart" style="height:250px"></canvas>
+                        </div>
+                        <span style="margin-left: 20%;">Accepted transactions</span>
+                        <span style=" width: 100px; height: 20px ;background-color: rgba(60,141,188,1)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span style="align-items: center">Rejected transactions</span>
+                        <span style=" width: 100px; height: 20px ;background-color: rgba(220,220,220,1)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content" style="background-color: white; margin-top: 50px">
+        <h1 style="margin-bottom: 40px">Transactions where @Model.Name is a buyer</h1>
+        <div style="width:90%; margin:0 auto;" class="tablecontainer">
+            <table id="myDatatableBuyerTransactions" class="table table-responsive table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Seller</th>
+                        <th scope="col">Seller Asset</th>
+                        <th scope="col">Seller Amount</th>
+                        <th scope="col">Buyer</th>
+                        <th scope="col">Buyer Asset</th>
+                        <th scope="col">Buyer Amount</th>
+                        <th scope="col">Transaction Status</th>
+                        <th scope="col">Order Start Date</th>
+                        <th scope="col">Order End Date</th>
+                        <th scope="col">Output</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6" style="width: 80%; margin-left: 10%">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Transactions Chart where @Model.Name is a buyer</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="areaCharttwo" style="height:250px"></canvas>
+                        </div>
+                        <span style="margin-left: 20%;">Accepted transactions</span>
+                        <span style=" width: 100px; height: 20px ;background-color: rgba(60,141,188,1)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span style="align-items: center">Rejected transactions</span>
+                        <span style=" width: 100px; height: 20px ;background-color: rgba(220,220,220,1)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="../../bower_components/chart.js/Chart.js"></script>
+<script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../dist/js/demo.js"></script>
+
+<script>
+    (function () {
+        var oTable = $('#myDatatableSellerTransactions').dataTable({
+            "language": {
+                "lengthMenu": "Afiseaza _MENU_ inregistrari pe pagina",
+                "zeroRecords": "Ne pare rau dar nu am gasit inregistrari",
+                "info": "Pagina _PAGE_ din _PAGES_",
+                "infoEmpty": "Nu sunt inregistrari disponibile",
+                "infoFiltered": "(filtru aplicat pe _MAX_ inregistrari totale)",
+                "sSearch": "Caută:",
+                "sProcessing": "Procesează...",
+                "oPaginate": {
+                    "sFirst": "Prima",
+                    "sPrevious": "Precedenta",
+                    "sNext": "Următoarea",
+                    "sLast": "Ultima"
+                }
+            },
+            "autoWidth": true,
+            "ajax": {
+                "url": '/Transaction/GetAllSellerTransactions/@Model.ID',
+                "type": "POST",
+                "dataType": 'json',
+            },
+            "columns": [
+                { "data": "Seller.Name" },
+                { "data": "SellerAsset" },
+                { "data": "SellerAmount" },
+                { "data": "Buyer.Name" },
+                { "data": "BuyerAsset" },
+                { "data": "BuyerAmount" },
+                { "data": "TransactionStatus" },
+                { "data": "OrderStartDateString" },
+                { "data": "OrderEndDateString" },
+                { "data": "Output" },
+            ]
+        })
+
+          var oTable = $('#myDatatableBuyerTransactions').dataTable({
+            "language": {
+                "lengthMenu": "Afiseaza _MENU_ inregistrari pe pagina",
+                "zeroRecords": "Ne pare rau dar nu am gasit inregistrari",
+                "info": "Pagina _PAGE_ din _PAGES_",
+                "infoEmpty": "Nu sunt inregistrari disponibile",
+                "infoFiltered": "(filtru aplicat pe _MAX_ inregistrari totale)",
+                "sSearch": "Caută:",
+                "sProcessing": "Procesează...",
+                "oPaginate": {
+                    "sFirst": "Prima",
+                    "sPrevious": "Precedenta",
+                    "sNext": "Următoarea",
+                    "sLast": "Ultima"
+                }
+            },
+            "autoWidth": true,
+            "ajax": {
+                "url": '/Transaction/GetAllBuyerTransactions/@Model.ID',
+                "type": "POST",
+                "dataType": 'json',
+            },
+            "columns": [
+                { "data": "Seller.Name" },
+                { "data": "SellerAsset" },
+                { "data": "SellerAmount" },
+                { "data": "Buyer.Name" },
+                { "data": "BuyerAsset" },
+                { "data": "BuyerAmount" },
+                { "data": "TransactionStatus" },
+                { "data": "OrderStartDateString" },
+                { "data": "OrderEndDateString" },
+                { "data": "Output" },
+            ]
+        })
+    }());
+
+
+
+    $(document).ready(function () {
+        $(function () {
+            //--------------
+            //- AREA CHART 1 -
+            //--------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+            // This will get the first returned node in the jQuery collection.
+            var areaChart = new Chart(areaChartCanvas)
+
+            var areaChartData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [
+                    {
+                        label: 'Accepted transactions',
+                        fillColor: 'rgba(60,141,188,0.9)',
+                        strokeColor: 'rgba(60,141,188,0.8)',
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                    },
+                    {
+                        label: 'Refused transactions',
+                        fillColor: 'rgba(210, 214, 222, 1)',
+                        strokeColor: 'rgba(210, 214, 222, 1)',
+                        pointColor: 'rgba(210, 214, 222, 1)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                    },
+                ]
+            }
+
+               $.ajax({
+                type: "POST",
+                url: '/Chart/getSellerLineChartData/@Model.ID',
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        console.log('data', JSON.stringify(data))
+
+                        areaChartData.datasets[0].data = data[1]
+                        areaChartData.datasets[1].data = data[0]
+                        areaChart.Line(areaChartData)
+                    }
+                },
+                error: function () {
+                    alert('An error occurred, please try again');
+                }
+            });
+
+        })
+
+         $(function () {
+            //--------------
+            //- AREA CHART 2 -
+            //--------------
+            // Get context with jQuery - using jQuery's .get() method.
+             var areaChartCanvas = $('#areaCharttwo').get(0).getContext('2d')
+            // This will get the first returned node in the jQuery collection.
+            var areaChart = new Chart(areaChartCanvas)
+
+            var areaChartData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [
+                    {
+                        label: 'Accepted transactions',
+                        fillColor: 'rgba(60,141,188,0.9)',
+                        strokeColor: 'rgba(60,141,188,0.8)',
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                    },
+                    {
+                        label: 'Refused transactions',
+                        fillColor: 'rgba(210, 214, 222, 1)',
+                        strokeColor: 'rgba(210, 214, 222, 1)',
+                        pointColor: 'rgba(210, 214, 222, 1)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                    },
+                ]
+            }
+
+               $.ajax({
+                type: "POST",
+                url: '/Chart/getBuyerLineChartData/@Model.ID',
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        console.log('data', JSON.stringify(data))
+
+                        areaChartData.datasets[0].data = data[1]
+                        areaChartData.datasets[1].data = data[0]
+                        areaChart.Line(areaChartData)
+                    }
+                },
+                error: function () {
+                    alert('An error occurred, please try again');
+                }
+            });
+
+        })
+    })
+</script>
+

@@ -1,0 +1,149 @@
+﻿@model SmartHack_UI.Models.TransactionTableCopy
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+<div class="content-wrapper" style="background-color: white">
+    <section class="content" style="background-color: white">
+
+        @using (Html.BeginForm("Save", "TransactionCopy", FormMethod.Post))
+            {
+            <div class="selectSeller" style="display:inline-block">
+                <div class="form-group" style="display: inline-block">
+                    <label>Seller</label><br />
+                    @Html.DropDownListFor(a => a.SellerID, 
+                    new SelectList(
+                        Model.companySellerDropDown, "ID", "Name"
+                    ), "Select seller")
+               
+                </div>
+            </div>
+            <br />
+
+            <div class="selectSeller" style="display:inline-block">
+                <div class="form-group" style="display: inline-block">
+                    <label>Buyer</label><br />
+                    @Html.DropDownListFor(a => a.BuyerID,
+                    new SelectList(
+                        Model.companyBuyerDropDown, "ID", "Name"
+                    ), "Select buyer")
+                    
+                </div>
+            </div>
+            <br />
+
+            <div class="selectSeller" style="display:inline-block">
+                <div class="form-group" style="display: inline-block">
+                    <label>Seller Asset</label><br />
+                    @Html.EditorFor(a => a.SellerAsset)
+                    <p>
+                        Possible values: 'crc_EUR' 
+                        'crc_USD'
+                        'crc_RON'
+                        'asst_stock'
+                        'asst_factory'
+                        'asst_department'
+                        'asst_products'
+                        'asst_buildings'
+                        'asst_machines'
+                    </p>
+                </div>
+            </div>
+            <br />
+
+            <div class="selectSeller" style="display:inline-block">
+                <div class="form-group" style="display: inline-block">
+                    <label>Seller Amount</label><br />
+                        @Html.EditorFor(model => model.SellerAmount, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @value = "0" } })
+                </div>
+            </div>
+            <br />
+
+            <div class="selectSeller" style="display:inline-block">
+                <div class="form-group" style="display: inline-block">
+                    <label>Buyer Asset</label><br />
+                    @Html.EditorFor(a => a.BuyerAsset)
+                    <p>
+                        Possible values: 'crc_EUR'
+                        'crc_USD'
+                        'crc_RON'
+                        'asst_stock'
+                        'asst_factory'
+                        'asst_department'
+                        'asst_products'
+                        'asst_buildings'
+                        'asst_machines'
+                    </p>
+                </div>
+            </div>
+            <br />
+
+            <div class="selectSeller" style="display:inline-block">
+                <div style="display: inline-block">
+                    <label>Buyer Amount</label><br />
+                    @Html.EditorFor(model => model.BuyerAmount, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.01", @value = "0" } })
+                </div>
+            </div>
+            <br />
+
+            <div class="selectSeller" style="display:inline-block">
+                <div class="form-group" style="display: inline-block">
+                    <label>Transaction Status</label><br />
+                    @Html.EditorFor(a => a.TransactionStatus)
+                    <p>
+                        Possible values: 'accepted'
+                        'rejected_by_buyer'
+                        'rejected_by_seller'
+                    </p>
+                  
+                </div>
+            </div>
+            <br />
+
+            <div class="selectSeller" style="display:inline-block">
+                <div class="form-group" style="display: inline-block">
+                    <label>Order start date</label><br />
+                    @Html.EditorFor(a => a.OrderStartDate, new { id = "start_date" })
+                </div>
+            </div>
+            <br />
+
+            <div class="selectSeller" style="display:inline-block">
+                <div class="form-group" style="display: inline-block">
+                    <label>Order end date</label><br />
+                    @Html.EditorFor(a => a.OrderEndDate, new { id = "end_date" })
+                </div>
+            </div>
+            <br />
+
+
+            <br /><br />
+            <div>
+                <input type="button" class="btn btn-primary" onclick="location.href='/Company/Index';" value="Inapoi" />
+                <input type="submit" class="btn btn-primary" id="SubmitFormButtonTransactionCopy" value="Salveaza" />
+            </div>
+        }
+    </section>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#start_date").datepicker({ dateFormat: 'yyyy-mm-dd' });
+        $("#end_date").datepicker({ dateFormat: 'dd/mm/yy' });
+    });
+</script>

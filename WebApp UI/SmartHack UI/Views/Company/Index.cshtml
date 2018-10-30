@@ -1,0 +1,143 @@
+﻿@model List<SmartHack_UI.Models.Company>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+<div class="content-wrapper" style="background-color: white">
+    <!-- Content Header (Page header) -->
+    <section class="content-header" style="background-color: white"></section>
+
+    <!-- Main content -->
+    <section class="content" style="background-color: white">
+        <h1 style="margin-bottom: 40px">Companies List</h1>
+
+        <div style="width:90%; margin:0 auto" class="tablecontainer">
+            <a class="btn btn-primary" href="/TransactionCopy/Save/" style="margin-bottom:20px; margin-top:20px;"><span class="glyphicon glyphicon-plus"></span> Adauga Tranzactie</a>
+            <table id="myDatatableCompany" class="table table-responsive table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Popularity Score</th>
+                        <th scope="col">Transaction Details</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </section>
+    <section class="content" style="background-color: white">
+
+        <h1 style="margin-bottom: 40px">Transactions from ML List</h1>
+        <div style="width:90%; margin:0 auto" class="tablecontainer">
+            <table id="myDatatableTransactionCopy" class="table table-responsive table-striped">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Seller</th>
+                        <th scope="col">Seller Asset</th>
+                        <th scope="col">Seller Amount</th>
+                        <th scope="col">Buyer</th>
+                        <th scope="col">Buyer Asset</th>
+                        <th scope="col">Buyer Amount</th>
+                        <th scope="col">Transaction Status</th>
+                        <th scope="col">Order Start Date</th>
+                        <th scope="col">Order End Date</th>
+                        <th scope="col">Output</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script>
+    (function () {
+        var oTable = $('#myDatatableCompany').dataTable({
+            "language": {
+                "lengthMenu": "Afiseaza _MENU_ inregistrari pe pagina",
+                "zeroRecords": "Ne pare rau dar nu am gasit inregistrari",
+                "info": "Pagina _PAGE_ din _PAGES_",
+                "infoEmpty": "Nu sunt inregistrari disponibile",
+                "infoFiltered": "(filtru aplicat pe _MAX_ inregistrari totale)",
+                "sSearch": "Caută:",
+                "sProcessing": "Procesează...",
+                "oPaginate": {
+                    "sFirst": "Prima",
+                    "sPrevious": "Precedenta",
+                    "sNext": "Următoarea",
+                    "sLast": "Ultima"
+                }
+            },
+            "autoWidth": false,
+            "columnDefs": [
+                { "width": "25%" },
+                { "width": "25%" },
+                { "width": "25%" },
+                { "width": "25%" },
+            ],
+            "ajax": {
+                "url": '/Company/GetAllCompanies',
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "Name" },
+                { "data": "Location" },
+                { "data": "Popularity" },
+                {
+                    "data": "ID", "render": function (data) {
+                        return '<a class = "btn btn-primary" style="color: white" href = "/Transaction/Index/' + data + '">See Transaction Details</a>'
+                    }
+                },
+            ]
+        })
+
+        var oTable = $('#myDatatableTransactionCopy').dataTable({
+            "language": {
+                "lengthMenu": "Afiseaza _MENU_ inregistrari pe pagina",
+                "zeroRecords": "Ne pare rau dar nu am gasit inregistrari",
+                "info": "Pagina _PAGE_ din _PAGES_",
+                "infoEmpty": "Nu sunt inregistrari disponibile",
+                "infoFiltered": "(filtru aplicat pe _MAX_ inregistrari totale)",
+                "sSearch": "Caută:",
+                "sProcessing": "Procesează...",
+                "oPaginate": {
+                    "sFirst": "Prima",
+                    "sPrevious": "Precedenta",
+                    "sNext": "Următoarea",
+                    "sLast": "Ultima"
+                }
+            },
+            "autoWidth": true,
+            "ajax": {
+                "url": '/Company/GetAllTransactionCopyTable',
+                "type": "POST",
+                "dataType": 'json',
+                error: function () {
+                    alert('An error occurred, please try again');
+                }
+            },
+            "columns": [
+                { "data": "Seller.Name" },
+                { "data": "SellerAsset" },
+                { "data": "SellerAmount" },
+                { "data": "Buyer.Name" },
+                { "data": "BuyerAsset" },
+                { "data": "BuyerAmount" },
+                { "data": "TransactionStatus" },
+                { "data": "OrderStartDateString" },
+                { "data": "OrderEndDateString" },
+                { "data": "Output" },
+            ]
+        })
+    }());
+</script>
+
